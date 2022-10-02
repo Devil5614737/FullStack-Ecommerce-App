@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Form, Button, Container, Spinner } from "react-bootstrap";
 
 import { request } from "../api/request";
@@ -25,6 +25,13 @@ const Home: NextPage = () => {
     localStorage.setItem("token", res.data);
     router.push("/products");
   };
+
+
+
+useEffect(()=>{
+  const token=localStorage.getItem('token')
+  token && router.push('/products')
+},[router])
 
   return (
     <Container
