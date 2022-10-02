@@ -30,7 +30,7 @@ const ProductFilter = ({
     <Card style={{ minHeight: "80vh", position: "sticky", top: 120 }}>
       <Card.Header>Filters</Card.Header>
       <Card.Body>
-        <Form className="mb-3">
+        {/* <Form className="mb-3">
           <Form.Control
             placeholder="search products"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -38,7 +38,7 @@ const ProductFilter = ({
             }
             value={query}
           />
-        </Form>
+        </Form> */}
 
         <DropdownButton
           variant="outline-dark"

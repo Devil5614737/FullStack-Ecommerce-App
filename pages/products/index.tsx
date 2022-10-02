@@ -19,12 +19,12 @@ export default function Home({ data }: PropsI) {
   const [query, setQuery] = useState<string>("");
 
   let filtered = data.filter((item) => {
-    if (query === "") {
-      return item;
-    }
-    if (item.title.toLowerCase().includes(query.toLowerCase())) {
-      return item;
-    }
+    // if (query === "") {
+    //   return item;
+    // }
+    // if (item.title.toLowerCase().includes(query.toLowerCase())) {
+    //   return item;
+    // }
     if (inStock) {
       return item.inStock === inStock;
     }

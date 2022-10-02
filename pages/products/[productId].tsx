@@ -9,6 +9,7 @@ import { CartContextI } from "../../interfaces/CartContext";
 import { CartContext } from "../../context/CartContext";
 import { AuthContext } from "../../context/AuthContext";
 import { AuthContextI } from "../../interfaces/AuthContext";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 interface PropsI {
@@ -51,11 +52,11 @@ const handleAddToCart=async(item:ProductI)=>{
   setFetch(true);
 const existedItem=cartItems.find(cartItem=>cartItem.title===item.title)
 
-if(typeof existedItem !=='undefined') return alert('already added to cart')
+if(typeof existedItem !=='undefined') return toast.error("item already added to cart")
 
 
   const { title, image, description, price, quantity, category}=item
-const {data}=await request.post('/data/add-to-cart',{
+await request.post('/data/add-to-cart',{
   title, image, description, price, quantity, category
 })
 
@@ -97,12 +98,22 @@ const {data}=await request.post('/data/add-to-cart',{
               </p>
               <p style={{ fontSize: "1.3rem" }}>{data?.description}</p>
               <Button disabled={!data?.inStock} onClick={()=>{handleAddToCart(data)
-              !user && alert('login required')
+              !user && toast.error("Login required")
               }} variant="outline-dark">add to cart</Button>
             </div>
           </div>
         </Container>
       </main>
+      <Toaster position="top-center"
+      toastOptions={{
+        duration:2000,
+        style: {
+          background: '#ff4d4d',
+          color: '#fff',
+        },
+      }}
+      
+      />
     </>
   );
 };

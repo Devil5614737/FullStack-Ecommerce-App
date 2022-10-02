@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState,useEffect } from 'react'
 import { Button, Card, ListGroup } from 'react-bootstrap'
 import { CartContext } from '../context/CartContext'
 import { CartContextI } from '../interfaces/CartContext'
@@ -8,13 +8,20 @@ interface PropsI{
 }
 
 const CartTotal = ({payment}:PropsI) => {
-    const {cartItems}=useContext<CartContextI>(CartContext)
+    const {cartItems}=useContext<CartContextI>(CartContext);
+    const[discount,setDiscount]=useState<number>(0);
 
 const quantity=cartItems?.map(item=>item.quantity).reduce((a,b)=>a+b,0)
 
-const discount=Math.floor(Math.random()*900)
 
 const total=cartItems?.map(item=>item.price*item.quantity).reduce((a,b)=>a+b,0)
+
+
+useEffect(()=>{
+
+  setDiscount(Math.floor(Math.random()*total))
+},[])
+
 
 
 

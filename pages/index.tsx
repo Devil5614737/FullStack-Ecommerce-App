@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { Card, Form, Button, Container } from "react-bootstrap";
+import { Card, Form, Button, Container, Spinner } from "react-bootstrap";
 
 import { request } from "../api/request";
 import Signup from "../components/Signup";
@@ -11,12 +11,17 @@ const Home: NextPage = () => {
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const[loading,setLoading]=useState<boolean>(false);
 
   const handleLogin = async (event: Event) => {
     event.preventDefault();
+    setLoading(true);
 
     const res = await request.post("/login", { email, password });
-    if (res.status !== 200) return alert("invalid credentials");
+    if(res.status===200){
+      setLoading(false)
+    }
+    if (res.status !== 200) return setLoading(false);
     localStorage.setItem("token", res.data);
     router.push("/products");
   };
@@ -65,7 +70,11 @@ const Home: NextPage = () => {
               variant="primary"
               type="submit"
             >
-              Login
+              {loading?<Spinner 
+              size="sm"
+              animation="border" />:
+              'Login'
+              }
             </Button>
             <Form.Text className="text-muted  mt-2 d-inline-block">
               {` Don't have an account?`}

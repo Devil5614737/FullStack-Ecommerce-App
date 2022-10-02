@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContextProvider } from "../context/AuthContext";
 import { CartContextProvider } from "../context/CartContext";
 
+
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>
